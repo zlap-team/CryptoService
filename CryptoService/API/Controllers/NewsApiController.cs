@@ -14,4 +14,28 @@ public class NewsApiController : BaseApiController
 
         return HandleResult(result);
     }
+    
+    [HttpGet("crypto")]
+    public async Task<ActionResult<List<Article>>> GetCryptoArticles()
+    {
+        var result = await Mediator.Send(new GetAllArticles.Query {SearchParameter = "crypto"});
+
+        return HandleResult(result);
+    }
+    
+    [HttpGet("bank")]
+    public async Task<ActionResult<List<Article>>> GetBankArticles()
+    {
+        var result = await Mediator.Send(new GetAllArticles.Query {SearchParameter = "bank"});
+
+        return HandleResult(result);
+    }
+    
+    [HttpGet("economy")]
+    public async Task<ActionResult<List<Article>>> GetEconomyArticles()
+    {
+        var result = await Mediator.Send(new GetAllArticles.Query {SearchParameter = "economy"});
+
+        return HandleResult(result);
+    }
 }
