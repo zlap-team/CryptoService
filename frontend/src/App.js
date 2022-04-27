@@ -13,20 +13,19 @@ import NewsScreen from './Screens/NewsScreen';
 import BankScreen from './Screens/BankScreen';
 import EconomyScreen from './Screens/EconomyScreen';
 import DashBoardScreen from './Screens/DashBoardScreen';
+import LoginScreen from './Screens/LoginScreen';
+import RegisterScreen from './Screens/RegisterScreen';
 
 function App() {
-  const value = useSelector((state) => state.modal.value)
-  const registerValue = useSelector((state) => state.registerModal.value)
-  
   return (
     <Router>
-      {value && <LoginModal />}
-      {registerValue && <RegisterModalComponent />}
-      {value ? <LoginModal /> : <Header />}
+      <Header />
       <main className='py-5'>
         <Container>
           <Routes>
-            <Route path='/' element={<HomeComponent />} />
+            <Route path='/' element={<HomeComponent />}/>
+            <Route path="/login" element={<LoginScreen/>} />
+            <Route path="/register" element={<RegisterScreen/>} />
             <Route path='/news' element={<NewsScreen />} />
             <Route path='/bank' element={<BankScreen />} />
             <Route path='/economy' element={<EconomyScreen />} />
