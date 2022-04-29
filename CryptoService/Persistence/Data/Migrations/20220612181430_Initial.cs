@@ -78,7 +78,7 @@ namespace Persistence.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -183,16 +183,16 @@ namespace Persistence.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Message = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ParentPostId = table.Column<Guid>(type: "uuid", nullable: false)
+                    PostId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PostReplies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PostReplies_Posts_ParentPostId",
-                        column: x => x.ParentPostId,
+                        name: "FK_PostReplies_Posts_PostId",
+                        column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -205,21 +205,19 @@ namespace Persistence.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PostReplies_ParentPostId",
+                name: "IX_PostReplies_PostId",
                 table: "PostReplies",
-                column: "ParentPostId");
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PostReplies_UserId",
                 table: "PostReplies",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_CreatorId",
                 table: "Posts",
-                column: "CreatorId",
-                unique: true);
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",

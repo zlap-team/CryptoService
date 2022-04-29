@@ -13,7 +13,7 @@ export const login = (email, password) => async (dispatch) =>{
             }
         }
 
-        const {data} = await axios.post('http://127.0.0.1:8000/users/login/', {'username': email, 'password': password}, config)
+        const {data} = await axios.post('https://localhost:5001/api/Account/login', {'email': email, 'password': password}, config)
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -48,7 +48,7 @@ export const register = (name, email, password) => async (dispatch) =>{
             }
         }
 
-        const {data} = await axios.post('http://127.0.0.1:8000/users/register/', { 'name': name, 'email': email, 'password': password}, config)
+        const {data} = await axios.post('https://localhost:5001/api/Account/register', { 'email': email, 'password': password,'confirmPassword': password, 'firstName': name}, config)
 
         dispatch({
             type: USER_REGISTER_SUCCESS,

@@ -32,10 +32,10 @@ public class GetAllPostReplies
             if (!doesPostExists) return Result<List<PostReplyDto>>.Failure("Post does not exist");
 
             var postReplies = await _unitOfWork.PostReplyRepository
-                .GetAllAsyncWithCriteria(x => x.ParentPostId == Guid.Parse(request.PostId));
+                .GetAllRepliesWithIncludes(x => x.PostId == Guid.Parse(request.PostId));
 
             var repliesToReturn = _mapper.Map<List<Domain.Entities.PostReply>, List<PostReplyDto>>(postReplies);
-            
+
             return Result<List<PostReplyDto>>.Success(repliesToReturn);
         }
     }

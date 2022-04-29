@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Repositories.Specific;
+﻿using System.Linq.Expressions;
+using Application.Contracts.Repositories.Specific;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Common;
@@ -22,5 +23,15 @@ public class PostRepository : BaseRepository<Post>, IPostRepository
             .ToListAsync();
 
         return posts;
+    }
+
+    public async Task<Post> GetWithIncludes(Expression<Func<Post, bool>> criteria)
+    {
+        var post = await _context.Posts
+            .Include(x => x.Creator)
+            .Include(x => x.PostReplies)
+            .FirstOrDefaultAsync(criteria);
+
+        return post;
     }
 }

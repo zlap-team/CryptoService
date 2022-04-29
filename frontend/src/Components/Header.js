@@ -1,9 +1,26 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Navbar, Container, Nav, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import App from '../App'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { NavDropdown } from 'react-bootstrap'
+import { logout } from '../actions/userActions'
+import { AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { Tooltip } from 'bootstrap'
 
 export default function Header() {
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
+
+
+    const dispatch = useDispatch()
+
+    const logoutHandler = () =>{
+        dispatch(logout())
+    }
 
   return (
     <Navbar bg="primary" variant="dark">
@@ -38,17 +55,35 @@ export default function Header() {
                     </Navbar.Brand>
                 </LinkContainer>
 
-                <LinkContainer to='/dashboard'>
-                    <Navbar.Brand>
-                        <Button>Dashboard</Button>
-                    </Navbar.Brand>
-                </LinkContainer>
+                {userInfo ?(
+                        <LinkContainer to='/dashboard'>
+                            <Navbar.Brand>
+                                <Button>Dashboard</Button>
+                            </Navbar.Brand>
+                        </LinkContainer>
+                ):(
+                        <LinkContainer to="/loginDashboard">
+                            <Button>Dashboard <AiOutlineQuestionCircle/></Button>  
+                        </LinkContainer>
+                )}
+                
 
-                <LinkContainer to='/login'>
-                    <Navbar.Brand>
-                        <Button>Login</Button>
-                    </Navbar.Brand>
-                </LinkContainer>
+                {userInfo ? (
+                        <NavDropdown title={userInfo.firstName} id='username'>
+                            <LinkContainer to='/profile'>
+                                <NavDropdown.Item>Profil</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <NavDropdown.Item onClick={logoutHandler}>Wyloguj</NavDropdown.Item>
+                            
+                        </NavDropdown>
+
+                        
+                    ) :(
+                            <LinkContainer to='/login'>
+                                <Nav.Link>Zaloguj <AiOutlineUser /></Nav.Link>
+                            </LinkContainer>
+                    )}
 
             </Nav>
         </Container>

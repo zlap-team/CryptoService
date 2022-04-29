@@ -60,7 +60,8 @@ public class RegisterUser
             var newUser = new UserDto
             {
                 Email = createdUser.Email,
-                FirstName = createdUser.FirstName
+                FirstName = createdUser.FirstName,
+                Id = createdUser.Id
             };
             
             return Result<UserDto>.Success(newUser);

@@ -36,7 +36,21 @@
             <summary>
             Get all posts with Creator and Post replies
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ForumController.GetAllPostReplies(System.String)">
+            <summary>
+            Get all post Replies
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.CreatePost(Application.DTOs.Forum.Post.CreatePostDto)">
+            <summary>
+            Create new post with Creator info
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.CreatePost(System.String,Application.DTOs.Forum.PostReply.CreatePostReplyDto)">
+            <summary>
+            Add reply to existing Post
+            </summary>
         </member>
     </members>
 </doc>

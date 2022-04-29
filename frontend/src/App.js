@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { useSelector } from 'react-redux';
 
-import LoginModal from './Components/LoginModal';
-import RegisterModalComponent from './Components/RegisterModalComponent'
+
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import HomeComponent from './Components/HomeComponent'
@@ -15,6 +14,8 @@ import EconomyScreen from './Screens/EconomyScreen';
 import DashBoardScreen from './Screens/DashBoardScreen';
 import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
+import LoginScreenDashboard from './Screens/LoginScreenDashboard'
+import HomeScreen from './Screens/HomeScreen'
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
       <main className='py-5'>
         <Container>
           <Routes>
-            <Route path='/' element={<HomeComponent />}/>
+            <Route path='/' element={<HomeScreen />}/>
             <Route path="/login" element={<LoginScreen/>} />
+            <Route path="/loginDashboard" element={<LoginScreenDashboard/>} />
             <Route path="/register" element={<RegisterScreen/>} />
             <Route path='/news' element={<NewsScreen />} />
             <Route path='/bank' element={<BankScreen />} />
