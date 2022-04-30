@@ -57,5 +57,10 @@
             Add reply to existing Post
             </summary>
         </member>
+        <member name="M:API.Controllers.ForumController.CreatePostAndGet(System.String,Application.DTOs.Forum.PostReply.CreatePostReplyDto)">
+            <summary>
+            Add reply to existing Post and get Post with its Replies
+            </summary>
+        </member>
     </members>
 </doc>
