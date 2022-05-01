@@ -65,8 +65,8 @@ namespace API
 
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddMediatR(typeof(Result<>).Assembly);
-            services.AddSingleton<ICoinApiClient>(new CoinApiClient());
-            services.AddSingleton<INewsApiClient>(new NewsApiClient());
+            services.AddSingleton<ICoinApiClient>(new CoinApiClient(_config));
+            services.AddSingleton<INewsApiClient>(new NewsApiClient(_config));
             services.AddSingleton<ICoinGeckoApiClient>(new CoinGeckoApiClient());
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
