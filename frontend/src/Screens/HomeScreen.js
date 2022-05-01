@@ -37,7 +37,7 @@ export default function DashBoardScreen() {
   return (
     <div>
         <h1>Most popular crypto right now!</h1>
-        <h6>You can check details of every crypto in our Dashboard</h6>
+        <h6>You can ask about every coin on our forum!</h6>
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
             <div>
                 <Table striped bordered hover>

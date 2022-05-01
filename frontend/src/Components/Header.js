@@ -8,13 +8,12 @@ import { NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 import { AiOutlineUser } from 'react-icons/ai'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
-import { Tooltip } from 'bootstrap'
+
 
 export default function Header() {
 
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
-
 
     const dispatch = useDispatch()
 
@@ -22,66 +21,75 @@ export default function Header() {
         dispatch(logout())
     }
 
+
+
   return (
     <Navbar bg="primary" variant="dark">
         <Container>
 
             <LinkContainer to='/'>
-                <Navbar.Brand>BlockchainApp</Navbar.Brand>
+                <Navbar.Brand><h2>Business and Crypto</h2></Navbar.Brand>
             </LinkContainer>
             <Nav className="me-auto">
 
                 <LinkContainer to='/'>
                     <Navbar.Brand>
-                        <Button>Home</Button>
+                        <Button><h5>Home</h5></Button>
                     </Navbar.Brand>
                 </LinkContainer>
 
                 <LinkContainer to='/news'>
                     <Navbar.Brand>
-                        <Button>News</Button>
+                        <Button><h5>News</h5></Button>
                     </Navbar.Brand>
                 </LinkContainer>
 
                 <LinkContainer to='/bank'>
                     <Navbar.Brand>
-                        <Button>Bank</Button>
+                        <Button><h5>Bank</h5></Button>
                     </Navbar.Brand>
                 </LinkContainer>
 
                 <LinkContainer to='/economy'>
                     <Navbar.Brand>
-                        <Button>Economy</Button>
+                        <Button><h5>Economy</h5></Button>
                     </Navbar.Brand>
                 </LinkContainer>
 
+                {/* <LinkContainer to='/forum'>
+                    <Navbar.Brand>
+                        <Button>Forum</Button>
+                    </Navbar.Brand>
+                </LinkContainer> */}
+
                 {userInfo ?(
-                        <LinkContainer to='/dashboard'>
+                        <LinkContainer to='/forum'>
                             <Navbar.Brand>
-                                <Button>Dashboard</Button>
+                                <Button><h5>Forum</h5></Button>
                             </Navbar.Brand>
                         </LinkContainer>
                 ):(
-                        <LinkContainer to="/loginDashboard">
-                            <Button>Dashboard <AiOutlineQuestionCircle/></Button>  
+                        <LinkContainer to="/loginForum">
+                            <Button style={{padding: 0}}><h5>Forum</h5><AiOutlineQuestionCircle/></Button>  
                         </LinkContainer>
+
                 )}
                 
 
                 {userInfo ? (
-                        <NavDropdown title={userInfo.firstName} id='username'>
-                            <LinkContainer to='/profile'>
+                        <NavDropdown title={<h5>{userInfo.firstName}</h5>} id='username'>
+                            {/* <LinkContainer to='/profile'>
                                 <NavDropdown.Item>Profil</NavDropdown.Item>
-                            </LinkContainer>
+                            </LinkContainer> */}
 
-                            <NavDropdown.Item onClick={logoutHandler}>Wyloguj</NavDropdown.Item>
+                            <NavDropdown.Item onClick={logoutHandler}><h5>Wyloguj</h5></NavDropdown.Item>
                             
                         </NavDropdown>
 
                         
                     ) :(
                             <LinkContainer to='/login'>
-                                <Nav.Link>Zaloguj <AiOutlineUser /></Nav.Link>
+                                <Nav.Link><Button variant='success' style={{margin: 0}} >Zaloguj</Button></Nav.Link>
                             </LinkContainer>
                     )}
 

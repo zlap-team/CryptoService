@@ -30,12 +30,20 @@ export default function NewsComponent({news}) {
         }
     }
 
+    const redirectUser = (par) =>{
+        window.open(par, '_blank');
+    }
+    
+
     return (
         <Card style={{ width: '40rem', height: '35rem'}} className='my-3  rounded'>
             <Card.Body>
-                <Link to={`/`}>
+                {/* <Link to={news.url}>
                     <Card.Img className='mb-3'src={news.urlToImage}/>
-                </Link>
+                </Link> */}
+                <Button variant="light" onClick={() => {redirectUser(news.url)}}>
+                    <Card.Img className='mb-3'src={news.urlToImage}/>
+                </Button>
                 <Link to={`/product/`} style={{textDecoration: 'none'}}>
                     <Card.Title as="div"><strong>{news.title}</strong></Card.Title>
                 </Link>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image'
+import { LinkContainer } from 'react-router-bootstrap'
 
 export default function DashboardTableComponent({coinsData}) {
 
@@ -30,11 +31,27 @@ export default function DashboardTableComponent({coinsData}) {
     
   return (
         <tr>
-            <td><Image src={coinsData.image} width={'40vw'}></Image></td>
-            <td><h5 className='text-secondary'>{coinsData.name}</h5></td>
-            <td><h5>{coinsData.currentPrice}</h5></td>
-            {coinsData.priceChange24h>0 ? <td><h5 className='text-success'>{coinsData.priceChange24h}</h5></td> : <h5 className='text-danger'>{coinsData.priceChange24h}</h5>}
-            <td><h6>{dhm(timeDifference)}</h6></td>
+            <td>
+                <LinkContainer to={`/crypto/${coinsData.id}`}>
+                    <Image src={coinsData.image} width={'40vw'}></Image>
+                </LinkContainer>
+            </td>
+            <td>
+                <LinkContainer to={`/crypto/${coinsData.id}`}>
+                    <h5 className='text-secondary'>{coinsData.name}</h5>
+                </LinkContainer>
+            </td>
+            <td>
+                <LinkContainer to={`/crypto/${coinsData.id}`}>
+                    <h5>{coinsData.currentPrice}</h5>
+                </LinkContainer>
+            </td>
+            {coinsData.priceChange24h>0 ? <td><LinkContainer to={`/crypto/${coinsData.id}`}><h5 className='text-success'>{coinsData.priceChange24h}</h5></LinkContainer ></td> : <LinkContainer to={`/crypto/${coinsData.id}`}><h5 className='text-danger'>{coinsData.priceChange24h}</h5></LinkContainer>}
+            <td>
+                <LinkContainer to={`/crypto/${coinsData.id}`}>
+                    <h6>{dhm(timeDifference)}</h6>
+                </LinkContainer>
+            </td>
         </tr>
   )
 }

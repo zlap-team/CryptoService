@@ -37,7 +37,7 @@ export default function LoginScreen() {
 
   return (
     <FormContainer>
-        <h1>To use Dashboard you have to be logged in ...</h1>
+        <h1>To use Forum you have to be logged in ...</h1>
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
