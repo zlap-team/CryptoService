@@ -14,7 +14,7 @@ export default function RoomComponent({posts}) {
 
     
   return (
-    <Card>
+    <Card className='m-4'>
         <Card.Header>Posted by {posts.creator.firstName}</Card.Header>
         <Card.Body>
             <Card.Title>{posts.title}</Card.Title>

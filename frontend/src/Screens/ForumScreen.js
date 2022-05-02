@@ -23,7 +23,7 @@ export default function ForumScreen() {
         <h1>Welcome on our discussion forum</h1>
         
         <LinkContainer to='/create_new_post'>
-            <Button>Create new Room</Button>
+            <Button className='m-3 p-3'>Create new Room</Button>
         </LinkContainer >
         
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
