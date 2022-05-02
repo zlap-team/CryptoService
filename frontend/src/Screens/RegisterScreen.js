@@ -45,7 +45,7 @@ export default function RegisterScreen() {
 
   return (
     <FormContainer>
-        <h1>Logowanie</h1>
+        <h1>Rejestracja</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}

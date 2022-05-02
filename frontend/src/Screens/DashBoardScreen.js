@@ -32,7 +32,7 @@ export default function DashBoardScreen() {
         <tbody>
           {coins?.map((item) => {
               return(
-                <DashboardTableComponent coinsData={item} />
+                <DashboardTableComponent coinsData={item} key={item.id}/>
               ) 
           })}
         </tbody>

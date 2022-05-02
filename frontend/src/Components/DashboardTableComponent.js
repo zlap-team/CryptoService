@@ -28,7 +28,7 @@ export default function DashboardTableComponent({coinsData}) {
             return sec + " seconds ago"
         }
     }
-    
+
   return (
         <tr>
             <td>
@@ -46,7 +46,21 @@ export default function DashboardTableComponent({coinsData}) {
                     <h5>{coinsData.currentPrice}</h5>
                 </LinkContainer>
             </td>
-            {coinsData.priceChange24h>0 ? <td><LinkContainer to={`/crypto/${coinsData.id}`}><h5 className='text-success'>{coinsData.priceChange24h}</h5></LinkContainer ></td> : <LinkContainer to={`/crypto/${coinsData.id}`}><h5 className='text-danger'>{coinsData.priceChange24h}</h5></LinkContainer>}
+            {coinsData.priceChange24h>0
+                ? <td>
+                    <LinkContainer to={`/crypto/${coinsData.id}`}>
+                        <h5 className='text-success'>
+                            {coinsData.priceChange24h}
+                        </h5>
+                    </LinkContainer >
+                </td>
+                : <td>
+                    <LinkContainer to={`/crypto/${coinsData.id}`}>
+                        <h5 className='text-danger'>
+                            {coinsData.priceChange24h}
+                        </h5>
+                    </LinkContainer>
+                </td>}
             <td>
                 <LinkContainer to={`/crypto/${coinsData.id}`}>
                     <h6>{dhm(timeDifference)}</h6>
