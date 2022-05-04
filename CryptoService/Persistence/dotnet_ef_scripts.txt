@@ -1,0 +1,11 @@
+Dodawanie nowej migracji:
+CryptoService (main -> origin) - główny folder 
+dotnet ef migrations add InitialMigration -o Data/Migrations -c CryptoDbContext -p Persistence\ -s API
+
+Tworzenie bazy i jej aktualizacja
+CryptoService (main -> origin) - główny folder
+dotnet ef database update -c CryptoDbContext -p Persistence\ -s API
+
+Usuwanie bazy
+CryptoService (main -> origin) - główny folder
+dotnet ef database drop -c CryptoDbContext -p Persistence\ -s API
