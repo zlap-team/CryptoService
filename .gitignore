@@ -396,3 +396,6 @@ Desktop.ini
 
 # Built Visual Studio Code Extensions
 *.vsix
+CryptoService/.idea/sonarlint/issuestore/c/9/
+
+CryptoService/.idea/sonarlint/issuestore/

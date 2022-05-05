@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Controllers.AccountController.LoginUser(Application.DTOs.Account.LoginDto)">
+            <summary>
+            Login existing user
+            </summary>
+            <param name="loginDto">Login form values</param>
+            <returns>New user object with basic information</returns>
+        </member>
+        <member name="M:API.Controllers.AccountController.RegisterUser(Application.DTOs.Account.RegisterDto)">
+            <summary>
+            Register new user
+            </summary>
+            <param name="registerDto">User data obtained from the register form</param>
+            <returns>New user object with basic information</returns>
+        </member>
+    </members>
+</doc>

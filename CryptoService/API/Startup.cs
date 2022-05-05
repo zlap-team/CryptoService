@@ -1,4 +1,9 @@
+using System.Reflection;
 using API.Middleware;
+using Application.Core;
+using Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Persistence;
@@ -24,8 +29,18 @@ namespace API
                     .EnableSensitiveDataLogging();
             });
 
+            services.AddIdentity<AppUser, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<CryptoDbContext>();
+
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPIv5", Version = "v1"}); });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPIv5", Version = "v1"});
+                
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
             services.AddCors(options =>
             {
@@ -39,6 +54,8 @@ namespace API
                             .WithOrigins("https://localhost:3000");
                     });
             });
+            
+            services.AddMediatR(typeof(Result<>).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
