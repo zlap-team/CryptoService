@@ -1,7 +1,9 @@
 using System.Reflection;
 using API.Middleware;
+using Application.Contracts.ExternalAPI;
 using Application.Core;
 using Domain.Entities;
+using Infrastructure.ExternalAPI.CoinAPI;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +57,9 @@ namespace API
                     });
             });
             
+            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddMediatR(typeof(Result<>).Assembly);
+            services.AddSingleton<ICoinApiClient>(new CoinApiClient());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

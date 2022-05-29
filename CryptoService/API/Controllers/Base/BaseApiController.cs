@@ -1,4 +1,5 @@
-﻿using Application.Core;
+﻿using Application.Contracts.ExternalAPI;
+using Application.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,11 @@ public class BaseApiController : ControllerBase
 
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices
         .GetService<IMediator>();
+    
+    private ICoinApiClient _coinApiClient;
+
+    protected ICoinApiClient CoinApiClient => _coinApiClient ??= HttpContext.RequestServices
+        .GetService<ICoinApiClient>();
 
     protected ActionResult HandleResult<T>(Result<T> result)
     {
