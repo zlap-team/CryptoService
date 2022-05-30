@@ -25,9 +25,12 @@ public class CoinApiClient : ICoinApiClient
     
     public async Task<List<ExchangeExternalApi>> GetAllExchanges()
     {
+
         var response = await _client
             .GetJsonAsync<List<ExchangeExternalApi>>("/exchanges");
 
+        var request = new RestRequest("/exchanges");
+        
         return response!;
     }
 
