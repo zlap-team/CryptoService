@@ -4,6 +4,7 @@ using Application.Contracts.ExternalAPI;
 using Application.Core;
 using Domain.Entities;
 using Infrastructure.ExternalAPI.CoinAPI;
+using Infrastructure.ExternalAPI.NewsAPI;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,7 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddMediatR(typeof(Result<>).Assembly);
             services.AddSingleton<ICoinApiClient>(new CoinApiClient());
+            services.AddSingleton<INewsApiClient>(new NewsApiClient());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

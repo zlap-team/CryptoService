@@ -28,8 +28,6 @@ public class CoinApiClient : ICoinApiClient
 
         var response = await _client
             .GetJsonAsync<List<ExchangeExternalApi>>("/exchanges");
-
-        var request = new RestRequest("/exchanges");
         
         return response!;
     }

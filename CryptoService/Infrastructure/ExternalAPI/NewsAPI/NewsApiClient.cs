@@ -1,7 +1,8 @@
 ﻿using Application.Contracts.ExternalAPI;
+using Domain.Models.News;
 using RestSharp;
 
-namespace Infrastructure.ExternalAPI.CoinAPI;
+namespace Infrastructure.ExternalAPI.NewsAPI;
 
 public class NewsApiClient : INewsApiClient
 {
@@ -19,7 +20,15 @@ public class NewsApiClient : INewsApiClient
         _client.Dispose();
         GC.SuppressFinalize(this);
     }
-    
+
+    public async Task<List<ArticleExternalApi>> GetAllArticles(string parameter)
+    {
+        var response = await _client
+            .GetJsonAsync<NewsResponseExternalApi>($"/everything?q={parameter}");
+        
+        return response!.Articles;
+    }
+
     // Methods
     
     // TODO NewsApi methods
