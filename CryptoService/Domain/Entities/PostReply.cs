@@ -8,4 +8,7 @@ public class PostReply
 
     public Guid UserId { get; set; }
     public virtual AppUser User { get; set; }
+
+    public Guid ParentPostId { get; set; }
+    public virtual Post Parent { get; set; }
 }

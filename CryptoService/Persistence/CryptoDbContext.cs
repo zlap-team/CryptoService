@@ -11,6 +11,9 @@ public class CryptoDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Gu
     {
     }
 
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<PostReply> PostReplies { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -22,5 +25,21 @@ public class CryptoDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Gu
         builder.Entity<IdentityRole<Guid>>(b => { b.ToTable("Roles"); });
         builder.Entity<IdentityRoleClaim<Guid>>(b => { b.ToTable("RoleClaims"); });
         builder.Entity<IdentityUserRole<Guid>>(b => { b.ToTable("UserRoles"); });
+
+        builder.Entity<Post>()
+            .HasOne(x => x.Creator)
+            .WithOne()
+            .HasForeignKey<Post>(z => z.CreatorId);
+
+        builder.Entity<Post>()
+            .HasMany(x => x.PostReplies)
+            .WithOne(x => x.Parent)
+            .HasForeignKey(x => x.ParentPostId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Entity<PostReply>()
+            .HasOne(x => x.User)
+            .WithOne()
+            .HasForeignKey<PostReply>(z => z.UserId);
     }
 }

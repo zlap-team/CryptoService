@@ -1,6 +1,8 @@
 using System.Reflection;
 using API.Middleware;
 using Application.Contracts.ExternalAPI;
+using Application.Contracts.Repositories.Common;
+using Application.Contracts.Repositories.Specific;
 using Application.Core;
 using Domain.Entities;
 using Infrastructure.ExternalAPI.CoinAPI;
@@ -11,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Persistence.Repositories.Common;
+using Persistence.Repositories.Specific;
 
 namespace API
 {
@@ -63,6 +67,11 @@ namespace API
             services.AddSingleton<ICoinApiClient>(new CoinApiClient());
             services.AddSingleton<INewsApiClient>(new NewsApiClient());
             services.AddSingleton<ICoinGeckoApiClient>(new CoinGeckoApiClient());
+            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostReplyRepository, PostReplyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
