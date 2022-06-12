@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20220504235224_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220612133113_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,11 +45,6 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")

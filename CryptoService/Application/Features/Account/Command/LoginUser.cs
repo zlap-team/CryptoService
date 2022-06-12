@@ -37,8 +37,7 @@ public class LoginUser
             var userDto = new UserDto
             {
                 Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName
+                FirstName = user.FirstName
             };
             
             return Result<UserDto>.Authorized(userDto);
