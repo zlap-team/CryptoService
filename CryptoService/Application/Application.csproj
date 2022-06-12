@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <Folder Include="Features\CoinApi\Command" />
+      <Folder Include="Features\CoinGecko\Command" />
     </ItemGroup>
 
 </Project>
