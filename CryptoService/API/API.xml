@@ -18,11 +18,18 @@
             <param name="registerDto">User data obtained from the register form</param>
             <returns>New user object with basic information</returns>
         </member>
-        <member name="M:API.Controllers.CoinGeckoApiController.GetExchangesIcons(System.String)">
+        <member name="M:API.Controllers.CoinGeckoApiController.GetAllMarkets(System.String)">
             <summary>
             Get all markets with name, image, price, price statistics and price changes
             </summary>
             <param name="currency"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CoinGeckoApiController.GetCryptoDetails(System.String)">
+            <summary>
+            Get single crypto details
+            </summary>
+            <param name="cryptoId">Id from list of markets</param>
             <returns></returns>
         </member>
     </members>

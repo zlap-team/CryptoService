@@ -28,4 +28,12 @@ public class CoinGeckoApiClient : ICoinGeckoApiClient
         
         return response!;
     }
+
+    public async Task<CryptoDetails> GetCryptoDetails(string cryptoId)
+    {
+        var response = await _client
+            .GetJsonAsync<CryptoDetails>($"/coins/{cryptoId}");
+        
+        return response!;
+    }
 }
