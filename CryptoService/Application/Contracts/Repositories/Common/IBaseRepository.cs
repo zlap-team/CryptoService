@@ -17,6 +17,12 @@ public interface IBaseRepository<T> where T : class
     /// </summary>
     /// <returns>A list of T Objects</returns>
     Task<List<T>> GetAllAsync();
+    
+    /// <summary>
+    /// Gets all objects of type T matching specified criteria
+    /// </summary>
+    /// <returns>A list of T Objects</returns>
+    Task<List<T>> GetAllAsyncWithCriteria(Expression<Func<T, bool>> criteria);
 
     /// <summary>
     /// Checks by Id if object does exist

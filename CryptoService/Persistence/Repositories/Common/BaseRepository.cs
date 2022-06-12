@@ -25,6 +25,15 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class
         return results;
     }
 
+    public async Task<List<T>> GetAllAsyncWithCriteria(Expression<Func<T, bool>> criteria)
+    {
+        var results = await _context.Set<T>()
+            .Where(criteria)
+            .ToListAsync();
+
+        return results;
+    }
+
     public async Task<bool> CheckIfExistsAsync(Expression<Func<T, bool>> criteria)
     {
         var result = await GetAsync(criteria);

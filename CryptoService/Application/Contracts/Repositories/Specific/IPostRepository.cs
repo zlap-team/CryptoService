@@ -5,4 +5,5 @@ namespace Application.Contracts.Repositories.Specific;
 
 public interface IPostRepository : IBaseRepository<Post>
 {
+    Task<List<Post>> GetAllPostsWithIncludes();
 }

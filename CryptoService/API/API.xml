@@ -32,5 +32,11 @@
             <param name="cryptoId">Id from list of markets</param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.ForumController.GetAllPosts">
+            <summary>
+            Get all posts with Creator and Post replies
+            </summary>
+            <returns></returns>
+        </member>
     </members>
 </doc>

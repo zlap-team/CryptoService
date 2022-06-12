@@ -21,6 +21,8 @@
     <ItemGroup>
       <Folder Include="Features\CoinApi\Command" />
       <Folder Include="Features\CoinGecko\Command" />
+      <Folder Include="Features\Forum\PostReply\Command" />
+      <Folder Include="Features\Forum\Post\Command" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,11 @@
-﻿using Application.DTOs.CoinApi;
+﻿using Application.DTOs.Account;
+using Application.DTOs.CoinApi;
 using Application.DTOs.CoinGecko;
+using Application.DTOs.Forum.Post;
+using Application.DTOs.Forum.PostReply;
 using Application.DTOs.NewsApi;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Models;
 using Domain.Models.CoinGecko;
 using Domain.Models.News;
@@ -12,6 +16,13 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
+        CreateMap<Post, PostDto>().ReverseMap();
+        CreateMap<Post, BasePostDto>().ReverseMap();
+        
+        CreateMap<PostReply, PostReplyDto>().ReverseMap();
+        
+        CreateMap<AppUser, BaseUserDto>().ReverseMap();
+        
         CreateMap<MarketExternalApi, MarketDto>().ReverseMap();
         
         CreateMap<ExchangeExternalApi, Exchange>().ReverseMap();
