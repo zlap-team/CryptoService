@@ -8,8 +8,7 @@ public class PostReplyDto
     public string Message { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public Guid UserId { get; set; }
     public virtual BaseUserDto User { get; set; }
 
-    public Guid ParentPostId { get; set; }
+    public Guid PostId { get; set; }
 }

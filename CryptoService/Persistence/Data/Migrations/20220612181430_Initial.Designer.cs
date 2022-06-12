@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20220612144630_Initial")]
+    [Migration("20220612181430_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,7 +99,7 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid>("CreatorId")
                         .HasColumnType("uuid");
@@ -112,8 +112,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId")
-                        .IsUnique();
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Posts");
                 });
@@ -125,12 +124,12 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Message")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ParentPostId")
+                    b.Property<Guid>("PostId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
@@ -138,10 +137,9 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentPostId");
+                    b.HasIndex("PostId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("PostReplies");
                 });
@@ -279,8 +277,8 @@ namespace Persistence.Data.Migrations
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.HasOne("Domain.Entities.AppUser", "Creator")
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.Post", "CreatorId")
+                        .WithMany()
+                        .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -289,19 +287,17 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.PostReply", b =>
                 {
-                    b.HasOne("Domain.Entities.Post", "Parent")
+                    b.HasOne("Domain.Entities.Post", null)
                         .WithMany("PostReplies")
-                        .HasForeignKey("ParentPostId")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.AppUser", "User")
-                        .WithOne()
-                        .HasForeignKey("Domain.Entities.PostReply", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Parent");
 
                     b.Navigation("User");
                 });

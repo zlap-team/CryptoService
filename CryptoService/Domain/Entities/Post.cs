@@ -12,5 +12,10 @@ public class Post
     public virtual AppUser Creator { get; set; }
     
     // odpowiedzi
-    public virtual ICollection<PostReply> PostReplies { get; set; }
+    public virtual IList<PostReply> PostReplies { get; set; }
+
+    public void AddReplyToPost(PostReply reply)
+    {
+        PostReplies.Add(reply);
+    }
 }
