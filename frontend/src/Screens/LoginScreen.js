@@ -4,17 +4,15 @@ import { Form, Button, Row, Col} from 'react-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 import Loader from '../Components/Loader'
 import Message from '../Components/Message'
-import { register } from '../actions/userActions'
+import { login } from '../actions/userActions'
 import FormContainer from '../Components/FormContainer'
 import { useSearchParams } from 'react-router-dom'
 
-export default function RegisterScreen() {
 
-    const [name, setName] = useState('')
+export default function LoginScreen() {
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [message, setMessage] = useState('')
     const [params] = useSearchParams()
 
     const disptach = useDispatch()
@@ -23,8 +21,8 @@ export default function RegisterScreen() {
     const url = window.location.href
     const redirect = !params ? params.get('=') : '/'
 
-    const userRegister = useSelector(state => state.userRegister)
-    const {error, loading, userInfo} = userRegister
+    const userLogin = useSelector(state => state.userLogin)
+    const {error, loading, userInfo} = userLogin
 
     useEffect(() =>{
         if(userInfo){
@@ -34,41 +32,20 @@ export default function RegisterScreen() {
 
     const submitHandler = (e) =>{
         e.preventDefault()
-
-        if(password != confirmPassword){
-            setMessage('Hasła nie są takie same!')
-        }else{
-            disptach(register(name, email, password))
-        }
-        
+        disptach(login(email, password))
     }
 
   return (
     <FormContainer>
         <h1>Logowanie</h1>
-        {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}
-
         <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
-                <Form.Label>Imię: </Form.Label>
-                <Form.Control
-                    required
-                    type='name'
-                    placeholder='Wpisz imię '
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
-
             <Form.Group controlId='email'>
                 <Form.Label>Email: </Form.Label>
                 <Form.Control
-                    required
                     type='email'
-                    placeholder='wpisz email'
+                    placeholder='Email: '
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 >
@@ -78,32 +55,19 @@ export default function RegisterScreen() {
             <Form.Group controlId='password'>
                 <Form.Label>Hasło: </Form.Label>
                 <Form.Control
-                    required
                     type='password'
-                    placeholder='Wpisz hasło'
+                    placeholder='Hasło: '
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 >
                 </Form.Control>
             </Form.Group>
-
-            <Form.Group controlId='passwordConfirm'>
-                <Form.Label>Potwierdź hasło: </Form.Label>
-                <Form.Control
-                    required
-                    type='password'
-                    placeholder='Potwierdź swoje hasło'
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                >
-                </Form.Control>
-            </Form.Group>
-            <Button type='submit' variant='primary'>Zarejestruj</Button>
-
+            <Button type='submit' variant='primary'>Zaloguj</Button>
         </Form>
+
         <Row className='py-3'>
             <Col>
-                Jesteś już zarejestrowany ? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Zaloguj się</Link>
+                Nie masz konta ? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Zarejestruj się</Link>
             </Col>
         </Row>
     </FormContainer>

@@ -1,9 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
-import modalReducer from './reducers/modalSlice'
-import registerModalReducer from './reducers/registerModalSlice'
-export const store = configureStore({
-    reducer: {
-        modal: modalReducer,
-        registerModal: registerModalReducer
-    },
+import { applyMiddleware, combineReducers } from '@reduxjs/toolkit'
+import { legacy_createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducer'
+
+const reducer = combineReducers({
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
+
 })
+
+const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+
+const initialState={
+    userLogin: {userInfo: userInfoFromStorage}
+}
+
+const middleware = [thunk]
+
+const store = legacy_createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+
+export default store
