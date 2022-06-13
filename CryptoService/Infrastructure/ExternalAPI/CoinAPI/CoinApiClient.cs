@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.ExternalAPI;
 using Domain.Models;
+using Microsoft.Extensions.Configuration;
 using RestSharp;
 
 namespace Infrastructure.ExternalAPI.CoinAPI;
@@ -8,11 +9,11 @@ public class CoinApiClient : ICoinApiClient
 {
     private readonly RestClient _client;
 
-    public CoinApiClient()
+    public CoinApiClient(IConfiguration config)
     {
         var options = new RestClientOptions("https://rest.coinapi.io/v1");
-
-        _client = new RestClient(options).AddDefaultHeader("X-CoinAPI-Key", "48EE2539-FC00-4BF5-98B2-2902472BC302");
+        
+        _client = new RestClient(options).AddDefaultHeader("X-CoinAPI-Key", config["CoinApiKey"]);
     }
     
     public void Dispose()

@@ -38,7 +38,7 @@ public class LoginUser
             {
                 Email = user.Email,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                Id = user.Id
             };
             
             return Result<UserDto>.Authorized(userDto);

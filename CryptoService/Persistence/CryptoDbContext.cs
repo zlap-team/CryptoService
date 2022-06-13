@@ -9,7 +9,11 @@ public class CryptoDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Gu
 {
     public CryptoDbContext(DbContextOptions<CryptoDbContext> options) : base(options)
     {
+        
     }
+
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<PostReply> PostReplies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

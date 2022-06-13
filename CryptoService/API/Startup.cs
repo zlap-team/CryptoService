@@ -1,6 +1,8 @@
 using System.Reflection;
 using API.Middleware;
 using Application.Contracts.ExternalAPI;
+using Application.Contracts.Repositories.Common;
+using Application.Contracts.Repositories.Specific;
 using Application.Core;
 using Domain.Entities;
 using Infrastructure.ExternalAPI.CoinAPI;
@@ -11,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Persistence;
+using Persistence.Repositories.Common;
+using Persistence.Repositories.Specific;
 
 namespace API
 {
@@ -31,6 +35,7 @@ namespace API
                 options.UseNpgsql(_config.GetConnectionString("CryptoDbDefault")!)
                     .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
                     .EnableSensitiveDataLogging();
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             });
 
             services.AddIdentity<AppUser, IdentityRole<Guid>>()
@@ -40,7 +45,7 @@ namespace API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPIv5", Version = "v1"});
-                
+
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -51,19 +56,23 @@ namespace API
                 options.AddPolicy("CorsPolicy",
                     policy =>
                     {
-                        policy
-                            .AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .AllowCredentials()
-                            .WithOrigins("https://localhost:3000");
+                        policy.AllowAnyHeader();
+                        policy.AllowAnyMethod();
+                        policy.AllowCredentials();
+                        policy.WithOrigins("http://localhost:3000");
                     });
             });
-            
+
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddMediatR(typeof(Result<>).Assembly);
-            services.AddSingleton<ICoinApiClient>(new CoinApiClient());
-            services.AddSingleton<INewsApiClient>(new NewsApiClient());
+            services.AddSingleton<ICoinApiClient>(new CoinApiClient(_config));
+            services.AddSingleton<INewsApiClient>(new NewsApiClient(_config));
             services.AddSingleton<ICoinGeckoApiClient>(new CoinGeckoApiClient());
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostReplyRepository, PostReplyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

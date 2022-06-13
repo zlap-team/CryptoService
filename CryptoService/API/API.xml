@@ -18,12 +18,49 @@
             <param name="registerDto">User data obtained from the register form</param>
             <returns>New user object with basic information</returns>
         </member>
-        <member name="M:API.Controllers.CoinGeckoApiController.GetExchangesIcons(System.String)">
+        <member name="M:API.Controllers.CoinGeckoApiController.GetAllMarkets(System.String)">
             <summary>
             Get all markets with name, image, price, price statistics and price changes
             </summary>
             <param name="currency"></param>
             <returns></returns>
+        </member>
+        <member name="M:API.Controllers.CoinGeckoApiController.GetCryptoDetails(System.String)">
+            <summary>
+            Get single crypto details
+            </summary>
+            <param name="cryptoId">Id from list of markets</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.ForumController.GetAllPosts">
+            <summary>
+            Get all posts with Creator and Post replies
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.GetPost(System.String)">
+            <summary>
+            Get single Post based on ID with Creator and Replies
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.GetAllPostReplies(System.String)">
+            <summary>
+            Get all post Replies
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.CreatePost(Application.DTOs.Forum.Post.CreatePostDto)">
+            <summary>
+            Create new post with Creator info
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.CreatePost(System.String,Application.DTOs.Forum.PostReply.CreatePostReplyDto)">
+            <summary>
+            Add reply to existing Post
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ForumController.CreatePostAndGet(System.String,Application.DTOs.Forum.PostReply.CreatePostReplyDto)">
+            <summary>
+            Add reply to existing Post and get Post with its Replies
+            </summary>
         </member>
     </members>
 </doc>

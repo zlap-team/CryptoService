@@ -27,7 +27,6 @@ public class RegisterUser
                     "Password must be at least 6 characters long, and must contain at least 1 Uppercase, 1 Lowercase, 1 Number, 1 special sign");
             RuleFor(x => x.RegisterDto.ConfirmPassword).Equal(p => p.RegisterDto.Password);
             RuleFor(x => x.RegisterDto.FirstName).NotEmpty().MaximumLength(50);
-            RuleFor(x => x.RegisterDto.LastName).NotEmpty().MaximumLength(50);
         }
     }
     
@@ -49,8 +48,7 @@ public class RegisterUser
             {
                 Email = request.RegisterDto.Email,
                 UserName = request.RegisterDto.Email,
-                FirstName = request.RegisterDto.FirstName,
-                LastName = request.RegisterDto.LastName
+                FirstName = request.RegisterDto.FirstName
             };
 
             var result = await _userManager.CreateAsync(userToCreate, request.RegisterDto.Password);
@@ -63,7 +61,7 @@ public class RegisterUser
             {
                 Email = createdUser.Email,
                 FirstName = createdUser.FirstName,
-                LastName = createdUser.LastName
+                Id = createdUser.Id
             };
             
             return Result<UserDto>.Success(newUser);

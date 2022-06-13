@@ -13,7 +13,7 @@ public class BaseApiController : ControllerBase
 
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices
         .GetService<IMediator>();
-    
+
     private ICoinApiClient _coinApiClient;
 
     protected ICoinApiClient CoinApiClient => _coinApiClient ??= HttpContext.RequestServices
@@ -31,6 +31,8 @@ public class BaseApiController : ControllerBase
             return Ok(result.Value);
         if (result.IsAuthorized == false && result.Value == null)
             return Unauthorized(result.Error);
+        if (!result.IsSuccess && !string.IsNullOrEmpty(result.Error))
+            return BadRequest(result.Error);
         return BadRequest(result.Error);
     }
 }
