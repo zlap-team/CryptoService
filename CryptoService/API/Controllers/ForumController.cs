@@ -70,4 +70,19 @@ public class ForumController : BaseApiController
 
         return HandleResult(result);
     }
+    
+    /// <summary>
+    /// Add reply to existing Post and get Post with its Replies
+    /// </summary>
+    [HttpPut("{postId}/add-reply-v2")]
+    public async Task<ActionResult<PostDto>> CreatePostAndGet(string postId, [FromBody] CreatePostReplyDto createPostReplyDto)
+    {
+        var result = await Mediator.Send(new CreatePostReplyAndGetPost.Command
+        {
+            ParentPostId = postId,
+            PostReplyModel = createPostReplyDto
+        });
+
+        return HandleResult(result);
+    }
 }
