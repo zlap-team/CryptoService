@@ -24,6 +24,17 @@ public class ForumController : BaseApiController
     }
     
     /// <summary>
+    /// Get single Post based on ID with Creator and Replies
+    /// </summary>
+    [HttpGet("posts/{postId}")]
+    public async Task<ActionResult<PostDto>> GetPost(string postId)
+    {
+        var results = await Mediator.Send(new GetPost.Query {PostId = postId});
+
+        return HandleResult(results);
+    }
+    
+    /// <summary>
     /// Get all post Replies
     /// </summary>
     [HttpGet("post-replies/{postId}")]

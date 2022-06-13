@@ -37,6 +37,11 @@
             Get all posts with Creator and Post replies
             </summary>
         </member>
+        <member name="M:API.Controllers.ForumController.GetPost(System.String)">
+            <summary>
+            Get single Post based on ID with Creator and Replies
+            </summary>
+        </member>
         <member name="M:API.Controllers.ForumController.GetAllPostReplies(System.String)">
             <summary>
             Get all post Replies

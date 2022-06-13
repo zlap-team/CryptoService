@@ -19,7 +19,7 @@ public class PostRepository : BaseRepository<Post>, IPostRepository
     {
         var posts = await _context.Posts
             .Include(x => x.Creator)
-            .Include(x => x.PostReplies)
+            .Include(x => x.PostReplies).ThenInclude(y => y.User)
             .ToListAsync();
 
         return posts;
@@ -29,7 +29,7 @@ public class PostRepository : BaseRepository<Post>, IPostRepository
     {
         var post = await _context.Posts
             .Include(x => x.Creator)
-            .Include(x => x.PostReplies)
+            .Include(x => x.PostReplies).ThenInclude(y => y.User)
             .FirstOrDefaultAsync(criteria);
 
         return post;
