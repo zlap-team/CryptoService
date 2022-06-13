@@ -78,9 +78,6 @@ export default function Header() {
 
                 {userInfo ? (
                         <NavDropdown title={<h5>{userInfo.firstName}</h5>} id='username'>
-                            {/* <LinkContainer to='/profile'>
-                                <NavDropdown.Item>Profil</NavDropdown.Item>
-                            </LinkContainer> */}
 
                             <NavDropdown.Item onClick={logoutHandler}><h5>Wyloguj</h5></NavDropdown.Item>
                             

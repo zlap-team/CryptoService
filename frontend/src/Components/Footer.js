@@ -6,7 +6,7 @@ export default function Footer() {
     <div>
         <Container className='text-center'>
             <Row>
-                <Col>Copyright &copy; BlockchainApp</Col>
+                <Col style={{paddingBottom: '5px'}}>Copyright &copy; BlockchainApp</Col>
             </Row>
         </Container>
     </div>
