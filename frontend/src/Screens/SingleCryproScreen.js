@@ -41,8 +41,8 @@ export default function SingleCryproScreen() {
             </Card.Body>
         </div> */}
         <div>
-            <Card.Img style={{ width: '8rem', height: '8rem', float: 'left'}} variant="top" src={singleCrypto["image"] && singleCrypto["image"].large} />
-            <h2 className='float-left'>{singleCrypto && singleCrypto.name}</h2>
+            <Card.Img style={{ width: '8rem', height: '8rem', float: 'left' }} variant="top" src={singleCrypto["image"] && singleCrypto["image"].large} />
+            <h2 className="float-left">{singleCrypto && singleCrypto.name}</h2>
         </div>
        <Tabs defaultActiveKey="valueChanges" id="uncontrolled-tab-example" className="mb-3">
             <Tab eventKey="name" title={singleCrypto && singleCrypto.name} disabled></Tab>
